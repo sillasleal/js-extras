@@ -1,0 +1,42 @@
+{
+    "name": "@ssl/js-extras",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "files": [
+        "./dist/*.js"
+    ],
+    "author": "Sillas S. Leal<sillas.s.leal@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
+        "build": "gulp build"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.0.0",
+        "babel-core": "6.25.0",
+        "babel-eslint": "7.2.3",
+        "babel-jest": "20.0.3",
+        "babel-loader": "7.1.1",
+        "babel-preset-babili": "^0.1.4",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-react-app": "3.0.3",
+        "babel-runtime": "6.26.0",
+        "babili": "^0.1.4",
+        "react": "16.0.0",
+        "react-app": "1.1.2",
+        "react-dev-utils": "4.1.0",
+        "react-dom": "16.0.0",
+        "react-inlinesvg": "^0.7.1",
+        "react-redux": "5.0.5",
+        "react-router": "^4.2.0",
+        "react-router-dom": "^4.2.2",
+        "babel-preset-env": "^1.6.1",
+        "fs-extra": "^5.0.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^7.0.0",
+        "gulp-babel-minify": "^0.2.0",
+        "gulp-strip-comments": "^2.5.2"
+    }
+}
