@@ -29,8 +29,8 @@
  * @param {type} target
  * @returns {Boolean}
  */
-String.prototype.isValid = function (target) {
-    return typeof target === 'string' && target.length;
+String.isValid = function (target) {
+    return Boolean(typeof target === 'string' && target.trim().length);
 };
 
 /**
@@ -144,44 +144,3 @@ String.prototype.containsIgAccents = function (search) {
     /**/
     return target.includes(newSearch);
 };
-
-if (!String.prototype.repeat) {
-    /**
-     * The repeat() method constructs and returns a new string which contains the specified number of copies of the string on which it was called, concatenated together.
-     * @param {String} count An integer between 0 and +∞: [0, +∞), indicating the number of times to repeat the string in the newly-created string that is to be returned.
-     * @returns {String} A new string containing the specified number of copies of the given string.
-     * @link <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat>
-     */
-    String.prototype.repeat = function (count) {
-        'use strict';
-        if (this === null) {
-            throw new TypeError('can\'t convert ' + this + ' to object');
-        }
-        var str = '' + this;
-        count = +count;
-        if (count !== count) {
-            count = 0;
-        }
-        if (count < 0) {
-            throw new RangeError('repeat count must be non-negative');
-        }
-        if (count === Infinity) {
-            throw new RangeError('repeat count must be less than infinity');
-        }
-        count = Math.floor(count);
-        if (str.length === 0 || count === 0) {
-            return '';
-        }
-        // Ensuring count is a 31-bit integer allows us to heavily optimize the
-        // main part. But anyway, most current (August 2014) browsers can't handle
-        // strings 1 << 28 chars or longer, so:
-        if (str.length * count >= 1 << 28) {
-            throw new RangeError('repeat count must not overflow maximum string size');
-        }
-        var rpt = '';
-        for (var i = 0; i < count; i++) {
-            rpt += str;
-        }
-        return rpt;
-    };
-}

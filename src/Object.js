@@ -55,19 +55,14 @@
 //        }
 //    });
 //}
-
-Object.defineProperty(Object, 'isObject', {
-    writable: true,
-    /**
-     * Simple object check.
-     * @param {mixed} item
-     * @returns {boolean}
-     * @link <https://stackoverflow.com/questions/27936772/how-to-deep-merge-instead-of-shallow-merge>
-     */
-    value: (item) => {
-        return (item && typeof item === 'object' && !Array.isArray(item));
-    }
-});
+/**
+ * Test if item is a real object
+ * @param {mixed} item
+ * @returns {Boolean}
+ */
+Object.isObject = function (item) {
+    return (Boolean(item) && typeof item === 'object' && !Array.isArray(item));
+};
 /**
  * Assign deeep objects
  * @param {object} target
@@ -107,8 +102,13 @@ Object.assignDeep = (target, ...sources) => {
  * @returns {Object.readProp.ret|@arr;ret|obj}
  */
 Object.readProp = (object, prop, defaultValue) => {
-    let props = typeof prop === "string" && prop.length ? prop.split(".") : [];
-    let ret = Object.isObject(object) ? object : {};
+    let props = typeof prop === "string" && prop.length
+            ? prop.split(".")
+            : [
+            ];
+    let ret = Object.isObject(object)
+            ? object
+            : {};
     /**/
     if (props.length) {
         for (let i = 0; i < (props.length); i++) {
@@ -132,7 +132,8 @@ if (!Object.values) {
      * @returns {Array} Retorna um array contendo os valores das propriedades do objeto
      */
     Object.values = function (object) {
-        let ret = [];
+        let ret = [
+        ];
         if (Object.isObject(object)) {
             Object.keys(object).forEach((prop) => {
                 ret.push(object[prop]);
