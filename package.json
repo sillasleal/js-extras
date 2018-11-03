@@ -1,10 +1,10 @@
 {
     "name": "@ssl-lib/js-extras",
-    "version": "1.0.0",
+    "version": "1.0.022",
     "description": "",
     "main": "dist/index.js",
     "files": [
-        "./dist/*.js"
+        "dist"
     ],
     "repository": {
         "type": "git",
