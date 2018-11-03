@@ -6,13 +6,20 @@
     "files": [
         "./dist/*.js"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sillasleal/js-extras.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sillasleal/js-extras/issues"
+    },
+    "homepage": "https://github.com/sillasleal/js-extras#readme",
     "author": "Sillas S. Leal<sillas.s.leal@gmail.com>",
     "license": "MIT",
     "scripts": {
         "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
         "build": "gulp build",
         "test": "nyc --reporter=json --reporter=html --reporter=text mocha test/**/*.js"
- 
     },
     "dependencies": {},
     "devDependencies": {
