@@ -1,8 +1,8 @@
 {
-    "name": "@ssl/js-extras",
+    "name": "@ssl-lib/js-extras",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/index.js",
     "files": [
         "./dist/*.js"
     ],
@@ -19,7 +19,9 @@
     "scripts": {
         "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
         "build": "gulp build",
-        "test": "nyc --reporter=json --reporter=html --reporter=text mocha test/**/*.js"
+        "test": "nyc --reporter=json --reporter=html --reporter=text mocha test/**/*.js",
+        "prepublish": "npm run test && npm run build",
+        "deploy": "npm publish --access=public"
     },
     "dependencies": {},
     "devDependencies": {
