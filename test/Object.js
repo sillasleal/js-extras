@@ -164,25 +164,4 @@ describe('Testing new functions from Object', function () {
             assert.equal(Object.readProp(obj, ''), obj);
         });
     });
-    describe('values', function () {
-        it('is defined', function () {
-            assert.equal(typeof Object.values, 'function');
-        });
-        it('object with no props', function () {
-            assert.equal(Object.values([
-            ]).length, 0);
-        });
-        it('return values in array', function () {
-            const obj = {
-                a: 10,
-                b: 20,
-                c: 30
-            };
-            assert.equal(JSON.stringify(Object.values(obj)), JSON.stringify([
-                10,
-                20,
-                30
-            ]));
-        });
-    });
 });

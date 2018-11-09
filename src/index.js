@@ -1,1 +1,1 @@
-require('./Array');require('./Object');require('./String');
+require('./Array');require('./Function');require('./Object');require('./String');

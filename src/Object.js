@@ -22,39 +22,6 @@
  * THE SOFTWARE.
  */
 
-//
-//if (!Object.assign) {
-//    Object.defineProperty(Object, 'assign', {
-//        enumerable: false,
-//        configurable: true,
-//        writable: true,
-//        value: function (target) {
-//            'use strict';
-//            if (target === undefined || target === null) {
-//                throw new TypeError('Cannot convert first argument to object');
-//            }
-//
-//            var to = Object(target);
-//            for (var i = 1; i < arguments.length; i++) {
-//                var nextSource = arguments[i];
-//                if (nextSource === undefined || nextSource === null) {
-//                    continue;
-//                }
-//                nextSource = Object(nextSource);
-//
-//                var keysArray = Object.keys(Object(nextSource));
-//                for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
-//                    var nextKey = keysArray[nextIndex];
-//                    var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
-//                    if (desc !== undefined && desc.enumerable) {
-//                        to[nextKey] = nextSource[nextKey];
-//                    }
-//                }
-//            }
-//            return to;
-//        }
-//    });
-//}
 /**
  * Test if item is a real object
  * @param {mixed} item
@@ -102,10 +69,9 @@ Object.assignDeep = (target, ...sources) => {
  * @returns {Object.readProp.ret|@arr;ret|obj}
  */
 Object.readProp = (object, prop, defaultValue) => {
-    let props = typeof prop === "string" && prop.length
+    let props = (typeof prop === "string" && prop.length)
             ? prop.split(".")
-            : [
-            ];
+            : [];
     let ret = Object.isObject(object)
             ? object
             : {};
@@ -123,23 +89,3 @@ Object.readProp = (object, prop, defaultValue) => {
         return object;
     }
 };
-
-if (!Object.values) {
-    /**
-     * Método que retorna os values do objeto em um array
-     * Método criado poi o IE não possui o método values
-     * @param {object} object O objeto
-     * @returns {Array} Retorna um array contendo os valores das propriedades do objeto
-     */
-    Object.values = function (object) {
-        let ret = [
-        ];
-        if (Object.isObject(object)) {
-            Object.keys(object).forEach((prop) => {
-                ret.push(object[prop]);
-            });
-        }
-        /**/
-        return ret;
-    };
-}
