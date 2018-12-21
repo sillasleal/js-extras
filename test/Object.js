@@ -164,4 +164,21 @@ describe('Testing new functions from Object', function () {
             assert.equal(Object.readProp(obj, ''), obj);
         });
     });
+    describe('Object.isEmpty', function () {
+        it('is defined', function () {
+            assert.equal(typeof Object.isEmpyt, 'function');
+        });
+        it('return false to a item that is not object', function () {
+            assert.equal(Object.isEmpyt(), false);
+        });
+        it('return false to a item that is not object', function () {
+            assert.equal(Object.isEmpyt(1), false);
+        });
+        it('return false to a empyt object', function () {
+            assert.equal(Object.isEmpyt({}), false);
+        });
+        it('return true to a empyt object', function () {
+            assert.equal(Object.isEmpyt({a: 90}), true);;
+        });
+    });
 });

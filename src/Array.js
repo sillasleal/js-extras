@@ -29,8 +29,7 @@
  * @returns {Array}
  */
 Array.range = function (start, end) {
-    let ret = [
-    ], toUp;
+    let ret = [], toUp;
     if (typeof start === "number" && typeof end === "number") {
         toUp = start <= end;
         if (start <= end) {
@@ -117,8 +116,7 @@ Array.uniq = (array) => {
     if (!Array.isArray(array)) {
         throw new Error("parameter is not a array");
     }
-    let newArray = [
-    ];
+    let newArray = [];
     for (var item in array) {
         if (newArray.indexOf(array[item]) < 0) {
             newArray.push(array[item]);

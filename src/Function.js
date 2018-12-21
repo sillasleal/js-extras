@@ -31,16 +31,19 @@
  * @returns {mixed} The return of last function
  */
 Function.pipeline = (firstARg, functions) => {
-    if(!Array.isArray(functions)){
+    if (!Array.isArray(functions)) {
         throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
     }
-    if(!functions.length){
+    if (!functions.length) {
         //If the array is empty
         return;
     }
     /**/
     let ret = firstARg;
     for (var item in functions) {
+        if (typeof functions[item] !== 'function') {
+            throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
+        }
         ret = functions[item](ret);
     }
     /**/

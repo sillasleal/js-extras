@@ -89,3 +89,12 @@ Object.readProp = (object, prop, defaultValue) => {
         return object;
     }
 };
+
+/**
+ * Method that check if object is empyt
+ * @param {object} object The object to be tested
+ * @returns {Boolean} Return TRUE if exists properties in object or FALSE if not
+ */
+Object.isEmpyt = function (object) {
+    return Object.isObject(object) && Boolean(Object.keys(object).length);
+};
