@@ -1,1 +1,4 @@
-require('./Array');require('./Function');require('./Object');require('./String');
+import './Array';
+import './Function';
+import './Object';
+import './String';

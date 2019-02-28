@@ -1,6 +1,6 @@
 {
     "name": "@ssl-lib/js-extras",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "",
     "main": "dist/index.js",
     "files": [
@@ -18,38 +18,17 @@
     "license": "MIT",
     "scripts": {
         "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
-        "build": "gulp build",
+        "build": "babel ./src --out-dir ./dist",
         "test": "nyc --reporter=json --reporter=html --reporter=text mocha test/**/*.js",
         "prepublish": "npm run test && npm run build",
         "deploy": "npm publish --access=public"
     },
-    "dependencies": {},
+    "browserslist": "> 0.25%, not dead",
     "devDependencies": {
-        "babel-cli": "^6.0.0",
-        "babel-core": "6.25.0",
-        "babel-eslint": "7.2.3",
-        "babel-jest": "20.0.3",
-        "babel-loader": "7.1.1",
-        "babel-preset-babili": "^0.1.4",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-react": "^6.24.1",
-        "babel-preset-react-app": "3.0.3",
-        "babel-runtime": "6.26.0",
-        "babili": "^0.1.4",
-        "fs-extra": "^5.0.0",
-        "gulp": "^3.9.1",
-        "gulp-babel": "^7.0.0",
-        "gulp-babel-minify": "^0.2.0",
-        "gulp-strip-comments": "^2.5.2",
-        "mocha": "^5.2.0",
-        "nyc": "^13.1.0",
-        "react": "16.0.0",
-        "react-app": "1.1.2",
-        "react-dev-utils": "4.1.0",
-        "react-dom": "16.0.0",
-        "react-inlinesvg": "^0.7.1",
-        "react-redux": "5.0.5",
-        "react-router": "^4.2.0",
-        "react-router-dom": "^4.2.2"
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "mocha": "^6.0.2",
+        "nyc": "^13.3.0"
     }
 }
