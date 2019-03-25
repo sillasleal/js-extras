@@ -72,9 +72,7 @@ Object.readProp = (object, prop, defaultValue) => {
     let props = (typeof prop === "string" && prop.length)
             ? prop.split(".")
             : [];
-    let ret = Object.isObject(object)
-            ? object
-            : {};
+    let ret = Object.isObject(object) ? object : {};
     /**/
     if (props.length) {
         for (let i = 0; i < (props.length); i++) {
@@ -86,7 +84,7 @@ Object.readProp = (object, prop, defaultValue) => {
         /**/
         return ret;
     } else {
-        return object;
+        return defaultValue;
     }
 };
 

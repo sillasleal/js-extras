@@ -161,7 +161,7 @@ describe('Testing new functions from Object', function () {
             const obj = {
                 a: 10
             };
-            assert.equal(Object.readProp(obj, ''), obj);
+            assert.equal(Object.readProp(obj, '', 90), 90);
         });
     });
     describe('Object.isEmpty', function () {
