@@ -28,9 +28,9 @@
  * Method that execute a pipeline with one uniq arg
  * @param {mixed} firstARg The initial arq
  * @param {Arryar} functions A functions to be executed
- * @returns {mixed} The return of last function
+ * @returns {Promise} A Promise with result of functions
  */
-Function.pipeline = (firstARg, functions) => {
+Function.pipeline = async (firstARg, functions) => {
     if (!Array.isArray(functions)) {
         throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
     }
@@ -44,7 +44,7 @@ Function.pipeline = (firstARg, functions) => {
         if (typeof functions[item] !== 'function') {
             throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
         }
-        ret = functions[item](ret);
+        ret = await functions[item](ret);
     }
     /**/
     return ret;
