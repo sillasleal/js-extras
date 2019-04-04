@@ -1,6 +1,6 @@
 {
     "name": "@ssl-lib/js-extras",
-    "version": "1.0.7",
+    "version": "1.1.101",
     "description": "",
     "main": "dist/index.js",
     "files": [
@@ -32,10 +32,13 @@
     "devDependencies": {
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.3.4",
+        "@babel/plugin-transform-runtime": "^7.4.0",
+        "@babel/polyfill": "^7.4.0",
         "@babel/preset-env": "^7.3.4",
-        "mocha": "^6.0.2",
-        "nyc": "^13.3.0",
+        "@babel/runtime": "^7.4.2",
         "fs-extra": "^7.0.1",
-        "nodemon": "^1.18.10"
+        "mocha": "^6.0.2",
+        "nodemon": "^1.18.10",
+        "nyc": "^13.3.0"
     }
 }

@@ -23,7 +23,7 @@
  */
 
 /* global Function */
-
+//import regeneratorRuntime from "regenerator-runtime";
 /**
  * Method that execute a pipeline with one uniq arg
  * @param {mixed} firstARg The initial arq
