@@ -23,7 +23,7 @@
  */
 
 
-if (!window.browserDetect) {
+if (window && !window.browserDetect) {
     class BrowserDetect {
         static MOBILE = "mobile";
         static DESKTOP = "desktop";

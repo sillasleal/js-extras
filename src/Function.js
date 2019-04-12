@@ -49,3 +49,5 @@ Function.pipeline = async (firstARg, functions) => {
     /**/
     return ret;
 };
+
+Function.requiredParameter = () => {throw new Error("REQUIRE_PARAMETER");};
