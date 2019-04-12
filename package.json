@@ -1,6 +1,6 @@
 {
     "name": "@ssl-lib/js-extras",
-    "version": "1.1.101",
+    "version": "1.1.102",
     "description": "",
     "main": "dist/index.js",
     "files": [
