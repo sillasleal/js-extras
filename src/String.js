@@ -71,7 +71,7 @@ String.prototype.removeAccents = function () {
         'Ä': 'A',
         'Ã': 'A',
         'Â': 'A',
-        
+
         'é': 'e',
         'è': 'e',
         'ë': 'e',
@@ -82,7 +82,7 @@ String.prototype.removeAccents = function () {
         'Ë': 'E',
 //        '˜E': 'E',
         'Ê': 'E',
-        
+
         'í': 'i',
         'ì': 'i',
         'ï': 'i',
@@ -93,7 +93,7 @@ String.prototype.removeAccents = function () {
         'Ï': 'I',
 //        '˜I': 'I',
         'Î': 'I',
-        
+
         'ó': 'o',
         'ò': 'o',
         'ö': 'o',
@@ -104,7 +104,7 @@ String.prototype.removeAccents = function () {
         'Ö': 'O',
         'Õ': 'O',
         'Ô': 'O',
-        
+
         'ú': 'u',
         'ù': 'u',
         'ü': 'u',
@@ -115,7 +115,7 @@ String.prototype.removeAccents = function () {
         'Ü': 'U',
 //        '˜U': 'U',
         'Û': 'U'
-        
+
     };
     var split = target.split("");
     for (var item in split) {
@@ -144,3 +144,47 @@ String.prototype.containsIgAccents = function (search) {
     /**/
     return target.includes(newSearch);
 };
+
+
+if (!String.stringOfValidValues) {
+    class StringOfValues {
+        getString() {
+            let newString = "";
+            /**/
+            for (var indexArguments in arguments) {
+                if (!isNaN(indexArguments)) {
+                    if (typeof arguments[indexArguments] === "object") {
+                        if (arguments[indexArguments]) {
+                            if (Array.isArray(arguments[indexArguments])) {
+                                for (var indexArrayArguments in arguments[indexArguments]) {
+                                    newString += `${this.getString(arguments[indexArguments][indexArrayArguments])} `;
+                                }
+                            } else {
+                                for (var indexObjectArguments in arguments[indexArguments]) {
+                                    if (typeof (arguments[indexArguments][indexObjectArguments]) === 'function') {
+                                        newString += `${this.getString(indexObjectArguments, arguments[indexArguments][indexObjectArguments])} `;
+                                    } else {
+                                        if (arguments[indexArguments][indexObjectArguments]) {
+                                            newString += `${indexObjectArguments} `;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (typeof arguments[indexArguments] === 'function') {
+//                    newString += `${arguments[indexArguments]()} `;
+                        newString += `${this.getString(arguments[indexArguments]())} `;
+                    } else {
+                        newString += `${String(arguments[indexArguments])} `;
+                    }
+                }
+            }
+            /**/
+            return  newString.trim();
+        }
+    }
+    const stringOfValues = new StringOfValues();
+    String.stringOfValidValues = function () {
+        return stringOfValues.getString(...arguments);
+    };
+}

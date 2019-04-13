@@ -4,4 +4,3 @@ import './Object';
 import './String';
 import './LoadScripts';
 import './BrowserDetect';
-import './ClassName';
