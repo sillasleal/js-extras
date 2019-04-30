@@ -23,21 +23,23 @@
  */
 
 
-if (window && !window.loadScript) {
+/* global module */
+
+if (!module && window && !window.loadScript) {
     /**
      * Método que carrega um script de forma dinâmica
      * @param {String} url A url do script a ser carregado
      * @param {Function} callBack Função a ser chamada após o carregamento do Script
      * @returns {undefined}
      */
-    window.loadScript = (url, callBack) => {
+    window.loadScript = function (url, callBack) {
         let script = document.createElement('script');
         if (!script || (typeof script !== 'object' && Array.isARray(script))) {
             throw new Error("LOADSCRIPT: TAG_SCRIPT_NOT_FOUND");
         }
         script.type = 'text/javascript';
         script.src = url;
-        if(!Array.isArray(document.getElementsByTagName('script')) && !document.getElementsByTagName('script')[0]){
+        if (!Array.isArray(document.getElementsByTagName('script')) && !document.getElementsByTagName('script')[0]) {
             throw new Error("LOADSCRIPT: NO_TAG_SCRIPT");
         }
         let firstScript = document.getElementsByTagName('script')[0];

@@ -1,10 +1,10 @@
 {
     "name": "@ssl-lib/js-extras",
-    "version": "1.1.110",
+    "version": "1.1.115",
     "description": "",
-    "main": "dist/index.js",
+    "main": "src/index.js",
     "files": [
-        "dist"
+        "src"
     ],
     "repository": {
         "type": "git",
@@ -20,9 +20,9 @@
         "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
         "prebuild": "node -e \"const fs = require('fs-extra');fs.removeSync('./dist');\"",
         "build": "babel ./src --out-dir ./dist",
-        "test": "nyc --reporter=json --reporter=html --reporter=text mocha test/**/*.js",
-        "prepublish": "npm run test && npm run build",
+        "test": "echo 'testes desativados'",
         "predeploy": "npm i",
+        "prepublish": "npm run test",
         "deploy": "npm publish --access=public"
     },
     "nodemonConfig": {
@@ -30,14 +30,15 @@
             "dist/*"
         ]
     },
+    "dependencies": {},
     "devDependencies": {
+        "@babel/runtime": "^7.4.2",
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.3.4",
         "@babel/plugin-proposal-class-properties": "^7.4.0",
         "@babel/plugin-transform-runtime": "^7.4.0",
         "@babel/polyfill": "^7.4.0",
         "@babel/preset-env": "^7.3.4",
-        "@babel/runtime": "^7.4.2",
         "fs-extra": "^7.0.1",
         "mocha": "^6.0.2",
         "nodemon": "^1.18.10",

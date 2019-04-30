@@ -1,6 +1,6 @@
-import './Array';
-import './Function';
-import './Object';
-import './String';
-import './LoadScripts';
-import './BrowserDetect';
+require('./Array');
+require('./Function');
+require('./Object');
+require('./String');
+require('./LoadScripts');
+require('./BrowserDetect');

@@ -23,15 +23,17 @@
  */
 
 
-if (window && !window.browserDetect) {
+/* global module */
+
+if (!module && window && !window.browserDetect) {
     class BrowserDetect {
-        static MOBILE = "mobile";
-        static DESKTOP = "desktop";
 
         constructor() {
             const navigator = window.navigator || {
                 userAgent: ""
             };
+            const MOBILE = "mobile";
+            const DESKTOP = "desktop";
             const testB = /(opera|edge|chromium|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i;
             const testD = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
             const ua = navigator.userAgent;
@@ -100,15 +102,15 @@ if (window && !window.browserDetect) {
                 this.name = M[0];
                 this.version = M[1];
             }
+            /**
+             * @description Method that informs if is a mobile or desktop browser
+             * @returns {Boolean} Returns TRUE if is mobile or FALSE if is a desktop
+             */
+            this.isMobile = () => {
+                return this.device === MOBILE;
+            };
         }
 
-        /**
-         * @description Method that informs if is a mobile or desktop browser
-         * @returns {Boolean} Returns TRUE if is mobile or FALSE if is a desktop
-         */
-        isMobile() {
-            return this.device === BrowserDetect.MOBILE;
-        }
     }
     //
     window.browserDetect = new BrowserDetect();

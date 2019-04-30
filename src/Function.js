@@ -50,4 +50,12 @@ Function.pipeline = async (firstARg, functions) => {
     return ret;
 };
 
-Function.requiredParameter = (parameter = "") => {throw new Error(`REQUIRE_PARAMETER ${parameter}`);};
+/**
+ * Fução que informa a obrigatoriedade de um parametro
+ * @param {String} parameter O nome do parametro
+ * @throws {Error} Lança uma nova exceção em qualquer caso
+ * @return {undefined}
+ */
+Function.requiredParameter = function(parameter = ""){
+    throw new Error(`REQUIRE_PARAMETER ${parameter}`);
+};

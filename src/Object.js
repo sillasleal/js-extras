@@ -77,7 +77,7 @@ Object.isEmpyt = function (object) {
  * @param {mixed} defaultValue 
  * @returns {Object.readProp.ret|@arr;ret|obj}
  */
-Object.readProp = (object, prop, defaultValue) => {
+Object.readProp = function (object, prop, defaultValue) {
     let props = (typeof prop === "string") ? prop.split(".") : [ ];
     let ret = typeof object === "object" ? object : { };
     /**/
