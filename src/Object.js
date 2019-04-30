@@ -47,7 +47,7 @@ Object.assignDeep = (target, ...sources) => {
             if (Object.isObject(source[key])) {
                 if (!target[key])
                     Object.assign(target, {
-                        [key]: {}
+                        [key]: { }
                     });
                 Object.assignDeep(target[key], source[key]);
             } else {
@@ -62,6 +62,15 @@ Object.assignDeep = (target, ...sources) => {
 };
 
 /**
+ * Method that check if object is empyt
+ * @param {object} object The object to be tested
+ * @returns {Boolean} Return TRUE if exists properties in object or FALSE if not
+ */
+Object.isEmpyt = function (object) {
+    return Object.isObject(object) && Boolean(Object.keys(object).length);
+};
+
+/**
  * Method that read a prop or subprop of object and return this
  * @param {object} object
  * @param {string} prop
@@ -69,14 +78,12 @@ Object.assignDeep = (target, ...sources) => {
  * @returns {Object.readProp.ret|@arr;ret|obj}
  */
 Object.readProp = (object, prop, defaultValue) => {
-    let props = (typeof prop === "string" && prop.length)
-            ? prop.split(".")
-            : [];
-    let ret = Object.isObject(object) ? object : {};
+    let props = (typeof prop === "string") ? prop.split(".") : [ ];
+    let ret = typeof object === "object" ? object : { };
     /**/
     if (props.length) {
         for (let i = 0; i < (props.length); i++) {
-            if (ret[props[i]] === undefined) {
+            if (ret[props[i]] === undefined || (i < (props.length - 1) && ret[props[i]] === null)) {
                 return defaultValue;
             }
             ret = ret[props[i]];
@@ -86,13 +93,4 @@ Object.readProp = (object, prop, defaultValue) => {
     } else {
         return defaultValue;
     }
-};
-
-/**
- * Method that check if object is empyt
- * @param {object} object The object to be tested
- * @returns {Boolean} Return TRUE if exists properties in object or FALSE if not
- */
-Object.isEmpyt = function (object) {
-    return Object.isObject(object) && Boolean(Object.keys(object).length);
 };

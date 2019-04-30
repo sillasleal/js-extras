@@ -124,3 +124,17 @@ Array.uniq = (array) => {
     }
     return newArray;
 };
+
+/**
+ * Função que verifica se o array informado é valido, ou seja, é array e possui elementos
+ * @param {mixed} array O array a ser testado
+ * @returns {Boolean} Retorna TRUE se for válido e FALSE se não for
+ */
+Array.isValid = (array) => Array.isArray(array) && array.length;
+
+/**
+ * Função que retorna o ultimo elemento do array, isso se ele for válido
+ * @param {Array} array O Array
+ * @returns {mixed} O ultimo elemento do Array
+ */
+Array.last = (array) => Array.isValid(array) ? array[array.length - 1] : undefined;
