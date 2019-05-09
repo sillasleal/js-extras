@@ -39,7 +39,7 @@ String.isValid = function (target) {
  * @param {string} replacement
  * @returns {String}
  */
-String.replaceAll = function (search, replacement) {
+String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.split(search).join(replacement);
 };
@@ -48,7 +48,7 @@ String.replaceAll = function (search, replacement) {
  * Replace first letter to uppercases
  * @returns {String}
  */
-String.ucFirst = function () {
+String.prototype.ucFirst = function () {
     var target = this;
     return target.substr(0, 1).toUpperCase() + target.substr(1);
 };
@@ -57,7 +57,7 @@ String.ucFirst = function () {
  * Remove all acents of string
  * @returns {String}
  */
-String.removeAccents = function () {
+String.prototype.removeAccents = function () {
     var target = this;
     var newString = "";
     var latin = {
@@ -134,7 +134,7 @@ String.removeAccents = function () {
  * @param {type} search
  * @returns {Boolean}
  */
-String.containsIgAccents = function (search) {
+String.prototype.containsIgAccents = function (search) {
     if (typeof search !== "string") {
         throw new TypeError("Parameter is not a string");
     }

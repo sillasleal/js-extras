@@ -25,7 +25,7 @@
 
 /* global module */
 
-if (!module && window && !window.loadScript) {
+if (window && !window.loadScript) {
     /**
      * Método que carrega um script de forma dinâmica
      * @param {String} url A url do script a ser carregado

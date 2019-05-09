@@ -25,7 +25,7 @@
 
 /* global module */
 
-if (!module && window && !window.browserDetect) {
+if (window && !window.browserDetect) {
     class BrowserDetect {
 
         constructor() {
