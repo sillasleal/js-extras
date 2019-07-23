@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 sillas.
@@ -74,12 +74,12 @@ Object.isEmpyt = function (object) {
  * Method that read a prop or subprop of object and return this
  * @param {object} object
  * @param {string} prop
- * @param {mixed} defaultValue 
+ * @param {mixed} defaultValue
  * @returns {Object.readProp.ret|@arr;ret|obj}
  */
 Object.readProp = function (object, prop, defaultValue) {
     let props = (typeof prop === "string") ? prop.split(".") : [ ];
-    let ret = typeof object === "object" ? object : { };
+    let ret = typeof object === "object" && object !== null ? object : { };
     /**/
     if (props.length) {
         for (let i = 0; i < (props.length); i++) {
