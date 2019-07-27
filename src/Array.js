@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 sillas.
@@ -26,25 +26,22 @@
  * Method that criate a array with range of numbers
  * @param {number} start
  * @param {number} end
- * @returns {Array}
+ * @return {Array}
  */
-Array.range = function (start, end) {
-    let ret = [ ], toUp;
-    if (typeof start === "number" && typeof end === "number") {
-        toUp = start <= end;
-        if (start <= end) {
-            for (let i = start; i <= end; i++) {
-                ret.push(i);
-            }
-
-        } else {
-            for (let i = start; i >= end; i--) {
-                ret.push(i);
-            }
-        }
-
+Array.range = function(start, end) {
+  const ret = [];
+  if (typeof start === 'number' && typeof end === 'number') {
+    if (start <= end) {
+      for (let i = start; i <= end; i++) {
+        ret.push(i);
+      }
+    } else {
+      for (let i = start; i >= end; i--) {
+        ret.push(i);
+      }
     }
-    return ret;
+  }
+  return ret;
 };
 
 
@@ -53,34 +50,45 @@ Array.range = function (start, end) {
  * @param {Array} array
  * @return {Array|Array.uniq.newArray}
  */
-Array.uniq = function (array) {
-    if (!Array.isArray(array)) {
-        throw new Error("parameter is not a array");
+Array.uniq = function(array) {
+  if (!Array.isArray(array)) {
+    throw new Error('parameter is not a array');
+  }
+  const newArray = [];
+  for (const item in array) {
+    if (newArray.indexOf(array[item]) < 0) {
+      newArray.push(array[item]);
     }
-    let newArray = [ ];
-    for (var item in array) {
-        if (newArray.indexOf(array[item]) < 0) {
-            newArray.push(array[item]);
-        }
-    }
-    /**/
-    return newArray;
+  }
+  /**/
+  return newArray;
 };
 
 /**
- * Função que verifica se o array informado é valido, ou seja, é array e possui elementos
+ * Função que verifica se o array informado é valido,
+ * ou seja, é array e possui elementos
  * @param {mixed} array O array a ser testado
- * @returns {Boolean} Retorna TRUE se for válido e FALSE se não for
+ * @return {Boolean} Retorna TRUE se for válido e FALSE se não for
  */
-Array.isValid = function (array) {
-    return Array.isArray(array) && array.length;
+Array.isValid = function(array) {
+  return Array.isArray(array) && array.length;
 };
 
 /**
  * Função que retorna o ultimo elemento do array, isso se ele for válido
  * @param {Array} array O Array
- * @returns {mixed} O ultimo elemento do Array
+ * @return {mixed} O ultimo elemento do Array
  */
-Array.last = function (array) {
-    return Array.isValid(array) ? array[array.length - 1] : undefined;
+Array.last = function(array) {
+  return Array.isValid(array)
+          ? array[array.length - 1]
+          : undefined;
+};
+
+/**
+ * Função que retorna o ultimo elemento do array, isso se ele for válido
+ * @return {mixed} O ultimo elemento do Array
+ */
+Array.prototype.last = function() {
+  return Array.last(this);
 };

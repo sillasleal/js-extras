@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 Sillas S. Leal<sillas.s.leal@gmail.com>.
@@ -25,70 +25,86 @@
 /* global Function */
 
 const assert = require('assert');
+const { expect } = require('chai');
 require('./../src/Function');
 
-describe('Testing new function from Funtion:', function () {
-    describe('pipeline', function () {
-        it('is defined', function () {
-            assert.equal((typeof Function.pipeline), 'function');
-        });
-
-        it('only allow array of functions', async function () {
-            let test = false;
-            try {
-                await Function.pipeline(0, {});
-            } catch (e) {
-                test = true;
-            }
-            assert.equal(test, true);
-            try {
-                test = false;
-                await Function.pipeline(0, []);
-            } catch (e) {
-                test = true;
-            }
-            assert.equal(test, false);
-        });
-
-        it('error if array contains a item that is not a function', async function () {
-            let test = false;
-            try {
-                await Function.pipeline(0, [
-                    () => {},
-                    {},
-                    5
-                ]);
-            } catch (e) {
-                test = true;
-            }
-            assert.equal(test, true);
-        });
-
-        it('execut all function', async function () {
-            const sq = n => n * n;
-            const value = 3;
-            const result = 6561;
-            const ret = await Function.pipeline(value, [sq, sq, sq]);
-            assert.equal(ret, result);
-            const plus2 = v => v + 2;
-            const ret2 = await Function.pipeline(ret, [
-                plus2, plus2
-            ]);
-            assert.equal(ret2, 6565);
-        });
-
-        it('execut all function with promise', async function () {
-            const sq = n => n * n;
-            const sqP = n => new Promise(r => setTimeout(() => r(n * n), 1000));
-            const value = 3;
-            const result = 6561;
-            const ret = await Function.pipeline(value, [sq, sq, sq]);
-            assert.equal(ret, result);
-            const plus2 = v => v + 2;
-            const ret2 = await Function.pipeline(ret, [
-                plus2, plus2
-            ]);
-            assert.equal(ret2, 6565);
-        });
+describe('Testing new function from Funtion:', function() {
+  describe('pipeline', function() {
+    it('is defined', function() {
+      assert.equal((typeof Function.pipeline), 'function');
     });
+
+    it('only allow array of functions', async function() {
+      let test = false;
+      try {
+        await Function.pipeline(0, { });
+      } catch (e) {
+        test = true;
+      }
+      assert.equal(test, true);
+      try {
+        test = false;
+        await Function.pipeline(0, [ ]);
+      } catch (e) {
+        test = true;
+      }
+      assert.equal(test, false);
+    });
+
+    it('error if array contains a item that is not a function', async function() {
+      let test = false;
+      try {
+        await Function.pipeline(0, [
+          () => {
+          },
+          { },
+          5
+        ]);
+      } catch (e) {
+        test = true;
+      }
+      assert.equal(test, true);
+    });
+
+    it('execut all function', async function() {
+      const sq = n => n * n;
+      const value = 3;
+      const result = 6561;
+      const ret = await Function.pipeline(value, [ sq, sq, sq ]);
+      assert.equal(ret, result);
+      const plus2 = v => v + 2;
+      const ret2 = await Function.pipeline(ret, [
+        plus2, plus2
+      ]);
+      assert.equal(ret2, 6565);
+    });
+
+    it('execut all function with promise', async function() {
+      const sq = n => n * n;
+      const sqP = n => new Promise(r => setTimeout(() => r(n * n), 1000));
+      const value = 3;
+      const result = 6561;
+      const ret = await Function.pipeline(value, [ sq, sq, sq ]);
+      assert.equal(ret, result);
+      const plus2 = v => v + 2;
+      const ret2 = await Function.pipeline(ret, [
+        plus2, plus2
+      ]);
+      assert.equal(ret2, 6565);
+    });
+  });
+
+  describe('requiredParameter', function() {
+    it('is defined', function() {
+      assert.equal(Function.requiredParameter !== undefined, true);
+    });
+
+    it('is a function', function() {
+      assert.equal(typeof Function.requiredParameter, 'function');
+    });
+
+    it('throws exception on run', function() {
+      expect(Function.requiredParameter).to.throw();
+    });
+  });
 });

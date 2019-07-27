@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 Sillas S. Leal<sillas.s.leal@gmail.com>.
@@ -25,82 +25,125 @@
 const assert = require('assert');
 require('./../src/Array');
 /**/
-describe('Testing new functions from Array:', function () {
-    describe('range', function () {
-        it('is defined', function () {
-            assert.equal((typeof Array.range), 'function');
-        });
-
-        it('return a array', function () {
-            assert.equal(Array.isArray(Array.range(1, 10)), true);
-        });
-
-        it('ascending order', function () {
-            let last = 0;
-            const newArray = Array.range(1, 10);
-            for (var item in newArray) {
-                assert.equal(last < newArray[item], true);
-                last = newArray[item];
-            }
-        });
-
-        it('descende order', function () {
-            let last = 11;
-            const newArray = Array.range(10, 1);
-            for (var item in newArray) {
-                assert.equal(last > newArray[item], true);
-                last = newArray[item];
-            }
-        });
-
-        it('empyt array', function () {
-            assert.equal(Array.range('a', 'b').length, 0);
-        });
+describe('Testing new functions from Array:', function() {
+  describe('range', function() {
+    it('is defined', function() {
+      assert.equal((typeof Array.range), 'function');
     });
 
-    describe('uniq', function () {
-        it('is defined', function () {
-            assert(typeof Array.uniq, 'function');
-        });
-
-        it('reject not arrays', function () {
-            let test = false;
-            try {
-                Array.uniq({});
-            } catch (e) {
-                test = true;
-            }
-            assert.equal(test, true);
-        });
-
-        it('return array', function () {
-            assert.equal(Array.isArray(Array.uniq([
-            ])), true);
-        });
-
-        it('remove duplicates', function () {
-            let qtList = {};
-            let qtNewList = {};
-            const list = [
-                1,
-                2,
-                3,
-                1,
-                4,
-                5,
-                2
-            ];
-            const newList = Array.uniq(list);
-            list.forEach(i => {
-                qtList[i] = qtList[i] ? qtList[i] + 1 : 1;
-            });
-            newList.forEach(i => {
-                qtNewList[i] = qtNewList[i] ? qtNewList[i] + 1 : 1;
-            });
-            /**/
-            assert.equal(list.length > newList.length, true);
-            assert.equal(qtList[1] !== qtNewList[1], true);
-            assert.equal(qtList[2] !== qtNewList[2], true);
-        });
+    it('return a array', function() {
+      assert.equal(Array.isArray(Array.range(1, 10)), true);
     });
+
+    it('ascending order', function() {
+      let last = 0;
+      const newArray = Array.range(1, 10);
+      for (const item of newArray) {
+        assert.equal(last < item, true);
+        last = item;
+      }
+    });
+
+    it('descende order', function() {
+      let last = 11;
+      const newArray = Array.range(10, 1);
+      for (const item of newArray) {
+        assert.equal(last > item, true);
+        last = item;
+      }
+    });
+
+    it('empyt array', function() {
+      assert.equal(Array.range('a', 'b').length, 0);
+    });
+  });
+
+  describe('uniq', function() {
+    it('is defined', function() {
+      assert(typeof Array.uniq, 'function');
+    });
+
+    it('reject not arrays', function() {
+      let test = false;
+      try {
+        Array.uniq({ });
+      } catch (e) {
+        test = true;
+      }
+      assert.equal(test, true);
+    });
+
+    it('return array', function() {
+      assert.equal(Array.isArray(Array.uniq([
+      ])), true);
+    });
+
+    it('remove duplicates', function() {
+      let qtList = { };
+      let qtNewList = { };
+      const list = [
+        1,
+        2,
+        3,
+        1,
+        4,
+        5,
+        2
+      ];
+      const newList = Array.uniq(list);
+      list.forEach(i => {
+        qtList[i] = qtList[i]
+                ? qtList[i] + 1
+                : 1;
+      });
+      newList.forEach(i => {
+        qtNewList[i] = qtNewList[i]
+                ? qtNewList[i] + 1
+                : 1;
+      });
+      /**/
+      assert.equal(list.length > newList.length, true);
+      assert.equal(qtList[1] !== qtNewList[1], true);
+      assert.equal(qtList[2] !== qtNewList[2], true);
+    });
+  });
+
+  describe('last', function() {
+    it('is defined', function() {
+      assert.equal(Array.last !== undefined, true);
+    });
+
+    it('is a function', function() {
+      assert.equal(typeof Array.last, 'function');
+    });
+
+    it('not array return undefined', function() {
+      assert.equal(Array.last(555), undefined);
+    });
+
+    it('return the last item', function() {
+      const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      assert.equal(Array.last(array), 9);
+    });
+  });
+
+  describe('prototype.last', function() {
+    it('is defined', function() {
+      assert.equal(Array.prototype.last !== undefined, true);
+    });
+
+    it('is a function', function() {
+      assert.equal(typeof Array.prototype.last, 'function');
+    });
+
+    it('in empty array, return undefined', function() {
+      const array = [];
+      assert.equal(array.last(), undefined);
+    });
+
+    it('return the last item', function() {
+      const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      assert.equal(array.last(), 9);
+    });
+  });
 });

@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 Sillas S. Leal<sillas.s.leal@gmail.com>.
@@ -23,31 +23,34 @@
  */
 
 /* global Function */
-//import regeneratorRuntime from "regenerator-runtime";
+
 /**
  * Method that execute a pipeline with one uniq arg
  * @param {mixed} firstARg The initial arq
  * @param {Arryar} functions A functions to be executed
- * @returns {Promise} A Promise with result of functions
+ * @return {Promise} A Promise with result of functions
  */
 Function.pipeline = async (firstARg, functions) => {
-    if (!Array.isArray(functions)) {
-        throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
+  const errorBase = 'Function.pipeline: ';
+  if (!Array.isArray(functions)) {
+    const error = errorBase + 'Functions have to be a Array of functions';
+    throw new TypeError(error);
+  }
+  if (!functions.length) {
+    // If the array is empty
+    return;
+  }
+  /**/
+  let ret = firstARg;
+  for (const func of functions) {
+    if (typeof func !== 'function') {
+      const error = errorBase + 'Functions have to be a Array of functions';
+      throw new TypeError(error);
     }
-    if (!functions.length) {
-        //If the array is empty
-        return;
-    }
-    /**/
-    let ret = firstARg;
-    for (var item in functions) {
-        if (typeof functions[item] !== 'function') {
-            throw new TypeError('Function.pipeline: Functions have to be a Array of functions');
-        }
-        ret = await functions[item](ret);
-    }
-    /**/
-    return ret;
+    ret = await func(ret);
+  }
+  /**/
+  return ret;
 };
 
 /**
@@ -56,6 +59,6 @@ Function.pipeline = async (firstARg, functions) => {
  * @throws {Error} Lança uma nova exceção em qualquer caso
  * @return {undefined}
  */
-Function.requiredParameter = function(parameter = ""){
-    throw new Error(`REQUIRE_PARAMETER ${parameter}`);
+Function.requiredParameter = function(parameter = '') {
+  throw new Error(`REQUIRE_PARAMETER ${parameter}`);
 };

@@ -1,47 +1,53 @@
 {
-    "name": "@ssl-lib/js-extras",
-    "version": "1.1.118",
-    "description": "",
-    "main": "src/index.js",
-    "files": [
-        "src"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sillasleal/js-extras.git"
-    },
-    "bugs": {
-        "url": "https://github.com/sillasleal/js-extras/issues"
-    },
-    "homepage": "https://github.com/sillasleal/js-extras#readme",
-    "author": "Sillas S. Leal<sillas.s.leal@gmail.com>",
-    "license": "MIT",
-    "scripts": {
-        "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
-        "prebuild": "node -e \"const fs = require('fs-extra');fs.removeSync('./dist');\"",
-        "build": "babel ./src --out-dir ./dist",
-        "test": "echo 'testes desativados'",
-        "predeploy": "npm i",
-        "prepublish": "npm run test",
-        "deploy": "npm publish --access=public"
-    },
-    "nodemonConfig": {
-        "ignore": [
-            "dist/*"
-        ]
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "@babel/runtime": "^7.4.2",
-        "@babel/cli": "^7.2.3",
-        "@babel/core": "^7.3.4",
-        "@babel/plugin-proposal-class-properties": "^7.4.0",
-        "@babel/plugin-transform-runtime": "^7.4.0",
-        "@babel/polyfill": "^7.4.0",
-        "@babel/preset-env": "^7.3.4",
-        "fs-extra": "^7.0.1",
-        "mocha": "^6.0.2",
-        "nodemon": "^1.18.10",
-        "nyc": "^13.3.0"
-    }
+  "name": "@ssl-lib/js-extras",
+  "version": "1.1.119",
+  "description": "",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sillasleal/js-extras.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sillasleal/js-extras/issues"
+  },
+  "homepage": "https://github.com/sillasleal/js-extras#readme",
+  "author": "Sillas S. Leal<sillas.s.leal@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "node -e \"const fs = require('fs');if(fs.existsSync('./package-lock.json')){fs.unlinkSync('./package-lock.json');}\"",
+    "prebuild": "node -e \"const fs = require('fs-extra');fs.removeSync('./dist');\"",
+    "build": "babel ./src --out-dir ./dist",
+    "test": "nyc --reporter=html --reporter=text --reporter=json mocha test/**/*.js",
+    "test:watch": "nodemon --exec npm run test",
+    "predeploy": "npm i",
+    "prepublish": "npm run test",
+    "deploy": "npm publish --access=public",
+    "eslint": "eslint ./src",
+    "eslint:fix": "eslint ./src --fix"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/*"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "chai": "4.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0",
+    "fs-extra": "^7.0.1",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10",
+    "nyc": "^13.3.0"
+  }
 }

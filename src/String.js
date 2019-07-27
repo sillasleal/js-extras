@@ -1,4 +1,4 @@
-/* 
+/*
  * The MIT License
  *
  * Copyright 2018 sillas.
@@ -27,164 +27,132 @@
 /**
  * Check if the target is a valid String
  * @param {type} target
- * @returns {Boolean}
+ * @return {Boolean}
  */
-String.isValid = function (target) {
-    return Boolean(typeof target === 'string' && target.trim().length);
+String.isValid = function(target) {
+  return Boolean(typeof target === 'string' && target.trim().length);
 };
 
 /**
  * Replace occurrences of search in string
  * @param {string} search
  * @param {string} replacement
- * @returns {String}
+ * @return {String}
  */
-String.prototype.replaceAll = function (search, replacement) {
-    var target = this;
-    return target.split(search).join(replacement);
+String.prototype.replaceAll = function(search, replacement) {
+  const target = this;
+  return target.split(search).join(replacement);
 };
 
 /**
  * Replace first letter to uppercases
- * @returns {String}
+ * @return {String}
  */
-String.prototype.ucFirst = function () {
-    var target = this;
-    return target.substr(0, 1).toUpperCase() + target.substr(1);
+String.prototype.ucFirst = function() {
+  const target = this;
+  return target.substr(0, 1).toUpperCase() + target.substr(1);
 };
 
 /**
  * Remove all acents of string
- * @returns {String}
+ * @return {String}
  */
-String.prototype.removeAccents = function () {
-    var target = this;
-    var newString = "";
-    var latin = {
-        'á': 'a',
-        'à': 'a',
-        'ä': 'a',
-        'ã': 'a',
-        'â': 'a',
-        'Á': 'A',
-        'À': 'A',
-        'Ä': 'A',
-        'Ã': 'A',
-        'Â': 'A',
+String.prototype.removeAccents = function() {
+  const target = this;
+  let newString = '';
+  const latin = {
+    'á': 'a',
+    'à': 'a',
+    'ä': 'a',
+    'ã': 'a',
+    'â': 'a',
+    'Á': 'A',
+    'À': 'A',
+    'Ä': 'A',
+    'Ã': 'A',
+    'Â': 'A',
 
-        'é': 'e',
-        'è': 'e',
-        'ë': 'e',
-//        '˜e': 'e',
-        'ê': 'e',
-        'É': 'E',
-        'È': 'E',
-        'Ë': 'E',
-//        '˜E': 'E',
-        'Ê': 'E',
+    'é': 'e',
+    'è': 'e',
+    'ë': 'e',
+    'ẽ': 'e',
+    'ê': 'e',
+    'É': 'E',
+    'È': 'E',
+    'Ë': 'E',
+    'Ẽ': 'E',
+    'Ê': 'E',
 
-        'í': 'i',
-        'ì': 'i',
-        'ï': 'i',
-//        '˜i': 'i',
-        'î': 'i',
-        'Í': 'I',
-        'Ì': 'I',
-        'Ï': 'I',
-//        '˜I': 'I',
-        'Î': 'I',
+    'í': 'i',
+    'ì': 'i',
+    'ï': 'i',
+    'ĩ': 'i',
+    'î': 'i',
+    'Í': 'I',
+    'Ì': 'I',
+    'Ï': 'I',
+    'Ĩ': 'I',
+    'Î': 'I',
 
-        'ó': 'o',
-        'ò': 'o',
-        'ö': 'o',
-        'õ': 'o',
-        'ô': 'o',
-        'Ó': 'O',
-        'Ò': 'O',
-        'Ö': 'O',
-        'Õ': 'O',
-        'Ô': 'O',
+    'ó': 'o',
+    'ò': 'o',
+    'ö': 'o',
+    'õ': 'o',
+    'ô': 'o',
+    'Ó': 'O',
+    'Ò': 'O',
+    'Ö': 'O',
+    'Õ': 'O',
+    'Ô': 'O',
 
-        'ú': 'u',
-        'ù': 'u',
-        'ü': 'u',
-//        '˜u': 'u',
-        'û': 'u',
-        'Ú': 'U',
-        'Ù': 'U',
-        'Ü': 'U',
-//        '˜U': 'U',
-        'Û': 'U'
+    'ú': 'u',
+    'ù': 'u',
+    'ü': 'u',
+    'ũ': 'u',
+    'û': 'u',
+    'Ú': 'U',
+    'Ù': 'U',
+    'Ü': 'U',
+    'Ũ': 'U',
+    'Û': 'U',
 
-    };
-    var split = target.split("");
-    for (var item in split) {
-        if (latin[split[item]]) {
-            newString += latin[split[item]];
-        } else {
-            newString += split[item];
-        }
+  };
+  const split = target.split('');
+  for (const item of split) {
+    if (latin[item]) {
+      newString += latin[item];
+    } else {
+      newString += item;
     }
-    /**/
-    return newString;
+  }
+  /**/
+  return newString;
 };
 
 /**
  * Determines whether one string may be found within another string.
  * @param {type} search
- * @returns {Boolean}
+ * @return {Boolean}
  */
-String.prototype.containsIgAccents = function (search) {
-    if (typeof search !== "string") {
-        throw new TypeError("Parameter is not a string");
-    }
-    /**/
-    var target = this.removeAccents();
-    var newSearch = search.removeAccents();
-    /**/
-    return target.includes(newSearch);
+String.prototype.containsIgAccents = function(search) {
+  if (typeof search !== 'string') {
+    throw new TypeError('Parameter is not a string');
+  }
+  /**/
+  const target = this.removeAccents();
+  const newSearch = search.removeAccents();
+  /**/
+  return target.includes(newSearch);
 };
 
-
-if (!String.stringOfValidValues) {
-    class StringOfValues {
-        getString() {
-            let newString = "";
-            /**/
-            for (var indexArguments in arguments) {
-                if (!isNaN(indexArguments)) {
-                    if (typeof arguments[indexArguments] === "object") {
-                        if (arguments[indexArguments]) {
-                            if (Array.isArray(arguments[indexArguments])) {
-                                for (var indexArrayArguments in arguments[indexArguments]) {
-                                    newString += `${this.getString(arguments[indexArguments][indexArrayArguments])} `;
-                                }
-                            } else {
-                                for (var indexObjectArguments in arguments[indexArguments]) {
-                                    if (typeof (arguments[indexArguments][indexObjectArguments]) === 'function') {
-                                        newString += `${this.getString(indexObjectArguments, arguments[indexArguments][indexObjectArguments])} `;
-                                    } else {
-                                        if (arguments[indexArguments][indexObjectArguments]) {
-                                            newString += `${indexObjectArguments} `;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if (typeof arguments[indexArguments] === 'function') {
-//                    newString += `${arguments[indexArguments]()} `;
-                        newString += `${this.getString(arguments[indexArguments]())} `;
-                    } else {
-                        newString += `${String(arguments[indexArguments])} `;
-                    }
-                }
-            }
-            /**/
-            return  newString.trim();
-        }
-    }
-    const stringOfValues = new StringOfValues();
-    String.stringOfValidValues = function () {
-        return stringOfValues.getString(...arguments);
-    };
-}
+String.ofValidValues = function(item) {
+  if (Array.isArray(item)) {
+    return item.filter((i) => i).join(' ');
+  } else if (typeof item === 'object' && !Array.isArray(item) && item) {
+    return Object.keys(item)
+        .filter((i) => item[i])
+        .join(' ');
+  } else {
+    return String(item);
+  }
+};

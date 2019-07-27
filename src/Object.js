@@ -25,72 +25,89 @@
 /**
  * Test if item is a real object
  * @param {mixed} item
- * @returns {Boolean}
+ * @return {Boolean}
  */
-Object.isObject = function (item) {
-    return (Boolean(item) && typeof item === 'object' && !Array.isArray(item));
+Object.isObject = function(item) {
+  return (Boolean(item) && typeof item === 'object' && !Array.isArray(item));
 };
 /**
  * Assign deeep objects
  * @param {object} target
  * @param {object} sources
- * @returns {object}
+ * @return {object}
  */
 Object.assignDeep = (target, ...sources) => {
-    if (!sources.length) {
-        return target;
-    }
-    const source = sources.shift();
-
-    if (Object.isObject(target) && Object.isObject(source)) {
-        for (const key in source) {
-            if (Object.isObject(source[key])) {
-                if (!target[key])
-                    Object.assign(target, {
-                        [key]: { }
-                    });
-                Object.assignDeep(target[key], source[key]);
-            } else {
-                Object.assign(target, {
-                    [key]: source[key]
-                });
-            }
+  if (!sources.length) {
+    return target;
+  }
+  const source = sources.shift();
+  /* istanbul ignore else */
+  if (Object.isObject(target) && Object.isObject(source)) {
+    for (const key in source) {
+      if (Object.isObject(source[key])) {
+        /* istanbul ignore else */
+        if (!target[key]) {
+          Object.assign(target, {
+            [key]: { },
+          });
         }
+        Object.assignDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, {
+          [key]: source[key],
+        });
+      }
     }
-    /**/
-    return Object.assignDeep(target, ...sources);
+  }
+  /**/
+  return Object.assignDeep(target, ...sources);
 };
 
 /**
  * Method that check if object is empyt
  * @param {object} object The object to be tested
- * @returns {Boolean} Return TRUE if exists properties in object or FALSE if not
+ * @return {Boolean} Return FALSE if exists properties in object or TRUE if not
  */
-Object.isEmpyt = function (object) {
-    return Object.isObject(object) && Boolean(Object.keys(object).length);
+Object.isEmpyt = function(object) {
+  return !(Object.isObject(object) && Boolean(Object.keys(object).length));
 };
 
 /**
  * Method that read a prop or subprop of object and return this
  * @param {object} object
- * @param {string} prop
+ * @param {string} propsData
  * @param {mixed} defaultValue
- * @returns {Object.readProp.ret|@arr;ret|obj}
+ * @return {Object.readProp.ret|@arr;ret|obj}
  */
-Object.readProp = function (object, prop, defaultValue) {
-    let props = (typeof prop === "string") ? prop.split(".") : [ ];
-    let ret = typeof object === "object" && object !== null ? object : { };
+Object.readProp = function(object, propsData, defaultValue) {
+  if (Object.isObject(propsData)) {
+    const {
+      path,
+      test,
+    } = propsData;
+    const value = Object.readProp(object, path);
+    const validate = typeof test === 'function'
+            ? test
+            : (v) => v !== undefined && v !== null;
+    return validate(value)
+            ? value
+            : defaultValue;
+  } else if (typeof propsData === 'string') {
+    const props = propsData.split('.');
+    let ret = typeof object === 'object' && object
+            ? object
+            : { };
     /**/
-    if (props.length) {
-        for (let i = 0; i < (props.length); i++) {
-            if (ret[props[i]] === undefined || (i < (props.length - 1) && ret[props[i]] === null)) {
-                return defaultValue;
-            }
-            ret = ret[props[i]];
-        }
-        /**/
-        return ret;
-    } else {
+    for (let i = 0; i < (props.length); i++) {
+      if (ret[props[i]] === undefined ||
+              (i < (props.length - 1) && ret[props[i]] === null)) {
         return defaultValue;
+      }
+      ret = ret[props[i]];
     }
+    /**/
+    return ret;
+  } else {
+    return defaultValue;
+  }
 };
