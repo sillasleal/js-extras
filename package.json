@@ -22,7 +22,7 @@
     "build": "babel ./src --out-dir ./dist",
     "test": "nyc --reporter=html --reporter=text --reporter=json mocha test/**/*.js",
     "test:watch": "nodemon --exec npm run test",
-    "predeploy": "npm i",
+    "predeploy": "npm run build",
     "prepublish": "npm run test",
     "deploy": "npm publish --access=public",
     "eslint": "eslint ./src",
