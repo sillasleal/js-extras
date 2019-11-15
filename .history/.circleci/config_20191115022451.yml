@@ -38,5 +38,3 @@ jobs:
 
       # build
       - run: yarn run build
-      - store_test_results:
-        path: coverage
