@@ -1,6 +1,6 @@
 {
   "name": "@ssl-lib/js-extras",
-  "version": "1.1.119",
+  "version": "1.1.120",
   "description": "",
   "main": "src/index.js",
   "files": [
@@ -22,9 +22,10 @@
     "build": "babel ./src --out-dir ./dist",
     "test": "nyc --reporter=html --reporter=text --reporter=json mocha test/**/*.js",
     "test:watch": "nodemon --exec npm run test",
-    "predeploy": "npm run build",
-    "prepublish": "npm run test",
+    "predeploy": "yarn run build && yarn run eslint:fix",
+    "prepublish": "yarn run test",
     "deploy": "npm publish --access=public",
+    "postdeploy": "git add . && git commit && git push",
     "eslint": "eslint ./src",
     "eslint:fix": "eslint ./src --fix"
   },

@@ -87,20 +87,23 @@ Object.readProp = function(object, propsData, defaultValue) {
     } = propsData;
     const value = Object.readProp(object, path);
     const validate = typeof test === 'function'
-            ? test
-            : (v) => v !== undefined && v !== null;
+        ?
+        test
+        : (v) => v !== undefined && v !== null;
     return validate(value)
-            ? value
-            : defaultValue;
+        ? value
+        : defaultValue;
   } else if (typeof propsData === 'string') {
     const props = propsData.split('.');
     let ret = typeof object === 'object' && object
-            ? object
-            : { };
+        ? object
+        : { };
     /**/
     for (let i = 0; i < (props.length); i++) {
-      if (ret[props[i]] === undefined ||
-              (i < (props.length - 1) && ret[props[i]] === null)) {
+      if (
+        ret[props[i]] === undefined ||
+          (i < (props.length - 1) && ret[props[i]] === null)
+      ) {
         return defaultValue;
       }
       ret = ret[props[i]];
@@ -110,4 +113,40 @@ Object.readProp = function(object, propsData, defaultValue) {
   } else {
     return defaultValue;
   }
+};
+
+/**
+ * Função que atribui um subvalor para um dado objeto
+ * @param {object} obj O objeto que receberá o valor
+ * @param {String} props As propriedades a serem gravadas
+ * @param {mixed} value O valor a ser atribuido
+ * @return {undefined}
+ */
+Object.writeProp = function(obj, props, value) {
+  if (!Object.isObject(obj)) {
+    throw new Error('Object.writeProp only works with objects!');
+  }
+  if (!String.isValid(props) && !Array.isArray(props)) {
+    throw new Error('props in Object.writeProp need to be a string!');
+  }
+  if (Array.isArray(props) && !props.length) {
+    throw new Error('props like array need to have elements');
+  }
+  /**/
+  const keys = Array.isArray(props)
+      ? props
+      : props.split('.');
+  /**/
+  let o = obj;
+  const len = keys.length;
+  /**/
+  for (let i = 0; i < len - 1; i++) {
+    const key = keys[i];
+    if (!o[key]) {
+      o[key] = {};
+    }
+    o = o[key];
+  }
+  /**/
+  o[keys[len - 1]] = value;
 };

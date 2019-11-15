@@ -23,93 +23,91 @@
  */
 
 
-/* global module */
-
-if (window && !window.browserDetect) {
-  class BrowserDetect {
-    constructor() {
-      const navigator = window.navigator || {
-        userAgent: '',
-      };
-      const MOBILE = 'mobile';
-      const DESKTOP = 'desktop';
-      const testB = /(opera|edge|chromium|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i;
-      const testD = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-      const ua = navigator.userAgent;
-      const uaLow = ua.toLowerCase();
-      const chromiuns = [
-        {
-          expression: /\bChromium\/(\d+)/,
-          name: 'Chromium',
-        },
-        {
-          expression: /\bOPR\/(\d+)/,
-          name: 'Opera',
-        },
-        {
-          expression: /\bEdge\/(\d+)/,
-          name: 'Edge',
-        },
+/**
+ * Classe que detecta o navegador do cliente
+ */
+class BrowserDetect {
+  /**
+   * Constructor
+   */
+  constructor() {
+    const navigator = window.navigator || {
+      userAgent: '',
+    };
+    const MOBILE = 'mobile';
+    const DESKTOP = 'desktop';
+    const testB =
+   /(opera|edge|chromium|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i;
+    const testD =
+        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+    const ua = navigator.userAgent;
+    const uaLow = ua.toLowerCase();
+    const chromiuns = [
+      {
+        expression: /\bChromium\/(\d+)/,
+        name: 'Chromium',
+      },
+      {
+        expression: /\bOPR\/(\d+)/,
+        name: 'Opera',
+      },
+      {
+        expression: /\bEdge\/(\d+)/,
+        name: 'Edge',
+      },
+    ];
+    /**/
+    let M = ua.match(testB) || [
+    ];
+    let test;
+    this.name = '';
+    this.version = 0;
+    this.vendor = navigator.vendor || 'Vendor Undefined';
+    this.product = navigator.product || 'Product Undefined';
+    this.platform = navigator.platform || 'Platform Undefined';
+    this.device = (testD.test(uaLow)) ? MOBILE : DESKTOP;
+    /**/
+    if (/trident/i.test(M[1])) {
+      test = /\brv[ :]+(\d+)/g.exec(ua) || [
       ];
-      /**/
-      let M = ua.match(testB) || [
-      ];
-      let test;
-      this.name = '';
-      this.version = 0;
-      this.vendor = navigator.vendor || 'Vendor Undefined';
-      this.product = navigator.product || 'Product Undefined';
-      this.platform = navigator.platform || 'Platform Undefined';
-      this.device =
-                    (testD.test(uaLow)) ?
-                    BrowserDetect.MOBILE :
-                    BrowserDetect.DESKTOP;
-      /**/
-      if (/trident/i.test(M[1])) {
-        test = /\brv[ :]+(\d+)/g.exec(ua) || [
-        ];
-        this.name = 'IE';
-        this.version = (test[1] || '');
-      }
-      if (this.name.length === 0) {
-        if (M[1] === 'Chrome') {
-          chromiuns.forEach((chromium) => {
-            test = ua.match(chromium.expression);
-            if (test !== null) {
-              this.name = chromium.name;
-              this.version = test[1];
-              return false;
-            }
-          });
-        }
-      }
-      if (this.name.length === 0) {
-        M =
-                        M[2] ?
-                        [
-                          M[1],
-                          M[2],
-                        ] :
-                        [
-                          navigator.appName,
-                          navigator.appVersion,
-                          '-?',
-                        ];
-        if ((test = ua.match(/version\/(\d+)/i)) !== null) {
-          M.splice(1, 1, test[1]);
-        }
-        this.name = M[0];
-        this.version = M[1];
-      }
-      /**
-             * @description Method that informs if is a mobile or desktop browser
-             * @return {Boolean} Returns TRUE if is mobile or FALSE if is a desktop
-             */
-      this.isMobile = () => {
-        return this.device === MOBILE;
-      };
+      this.name = 'IE';
+      this.version = (test[1] || '');
     }
+    if (this.name.length === 0) {
+      if (M[1] === 'Chrome') {
+        chromiuns.forEach((chromium) => {
+          test = ua.match(chromium.expression);
+          if (test !== null) {
+            this.name = chromium.name;
+            this.version = test[1];
+            return false;
+          }
+        });
+      }
+    }
+    if (this.name.length === 0) {
+      M = M[2] ? [
+        M[1],
+        M[2],
+      ] : [
+        navigator.appName,
+        navigator.appVersion,
+        '-?',
+      ];
+      if ((test = ua.match(/version\/(\d+)/i)) !== null) {
+        M.splice(1, 1, test[1]);
+      }
+      this.name = M[0];
+      this.version = M[1];
+    }
+    /**
+     * @description Method that informs if is a mobile or desktop browser
+     * @return {Boolean} Returns TRUE if is mobile or FALSE if is a desktop
+     */
+    this.isMobile = () => {
+      return this.device === MOBILE;
+    };
   }
-  //
-  window.browserDetect = new BrowserDetect();
 }
+//
+window.browserDetect = new BrowserDetect();

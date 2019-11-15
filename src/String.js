@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-/* global Infinity */
-
 /**
  * Check if the target is a valid String
  * @param {type} target

@@ -25,7 +25,7 @@
 /* global Function */
 
 const assert = require('assert');
-const { expect } = require('chai');
+const {expect} = require('chai');
 require('./../src/Function');
 
 describe('Testing new function from Funtion:', function() {

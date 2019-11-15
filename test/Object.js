@@ -23,6 +23,7 @@
  */
 Object.values = undefined;
 /**/
+const {expect} = require('chai');
 const assert = require('assert');
 require('./../src/Object');
 
@@ -232,6 +233,46 @@ describe('Testing new functions from Object', function() {
 
     it('informe a not object', function() {
       assert.equal(Object.readProp(99, 'a.b.c', 12), 12);
+    });
+  });
+
+  describe('writeProp', function() {
+    it('is defined', function() {
+      assert.equal(typeof Object.writeProp, 'function');
+    });
+
+    it('only works with objects', function() {
+      expect(() => Object.writeProp(9)).to.throw();
+      expect(() => Object.writeProp('')).to.throw();
+      expect(() => Object.writeProp(true)).to.throw();
+    });
+
+    it('props have to be a valid string or a array', function() {
+      expect(() => Object.writeProp({}, 9)).to.throw();
+      expect(() => Object.writeProp({}, '')).to.throw();
+      expect(() => Object.writeProp({}, true)).to.throw();
+    });
+
+    it('props like array need to have elements', function() {
+      expect(() => Object.writeProp({}, [])).to.throw();
+    });
+
+    it('write a object based in a string', function() {
+      const obj = {};
+      Object.writeProp(obj, 'a', 90);
+      assert.equal(obj.a, 90);
+    });
+
+    it('write a sub prop in a object based in a string', function() {
+      const obj = {};
+      Object.writeProp(obj, 'a.b.c.d', 100);
+      assert.equal(obj.a.b.c.d, 100);
+    });
+
+    it('write a sub prop in a object based in a array', function() {
+      const obj = {};
+      Object.writeProp(obj, ['a', 'b', 'c', 'd'], 100);
+      assert.equal(obj.a.b.c.d, 100);
     });
   });
 });
