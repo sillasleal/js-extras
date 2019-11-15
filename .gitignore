@@ -68,3 +68,4 @@ typings/
 /nbproject/private/
 /dist/
 /.circleci/
+/package-lock.json
