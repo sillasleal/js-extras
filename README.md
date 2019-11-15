@@ -1,1 +1,1 @@
-# js-extras [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sillasleal/js-extras/blob/master/LICENSE)
+# js-extras [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sillasleal/js-extras/blob/master/LICENSE) [![Build Status](https://travis-ci.org/sillasleal/js-extras.svg?branch=master)](https://travis-ci.org/sillasleal/js-extras) [![Coverage Status](https://coveralls.io/repos/github/sillasleal/js-extras/badge.svg?branch=master)](https://coveralls.io/github/sillasleal/js-extras?branch=master)
