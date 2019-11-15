@@ -67,6 +67,5 @@ typings/
 /npm/
 /nbproject/private/
 /dist/
-/.circleci/
 /package-lock.json
 /etc
