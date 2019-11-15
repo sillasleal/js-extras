@@ -142,6 +142,7 @@ Object.writeProp = function(obj, props, value) {
   /**/
   for (let i = 0; i < len - 1; i++) {
     const key = keys[i];
+    /* istanbul ignore else */
     if (!o[key]) {
       o[key] = {};
     }
