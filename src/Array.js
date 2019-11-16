@@ -80,9 +80,7 @@ Array.isValid = function(array) {
  * @return {mixed} O ultimo elemento do Array
  */
 Array.last = function(array) {
-  return Array.isValid(array)
-          ? array[array.length - 1]
-          : undefined;
+  return Array.isValid(array) ? array[array.length - 1] : undefined;
 };
 
 /**

@@ -86,18 +86,12 @@ Object.readProp = function(object, propsData, defaultValue) {
       test,
     } = propsData;
     const value = Object.readProp(object, path);
-    const validate = typeof test === 'function'
-        ?
-        test
-        : (v) => v !== undefined && v !== null;
-    return validate(value)
-        ? value
-        : defaultValue;
+    const validate = typeof test === 'function' ? test :
+      (v) => v !== undefined && v !== null;
+    return validate(value) ? value : defaultValue;
   } else if (typeof propsData === 'string') {
     const props = propsData.split('.');
-    let ret = typeof object === 'object' && object
-        ? object
-        : { };
+    let ret = typeof object === 'object' && object ? object : { };
     /**/
     for (let i = 0; i < (props.length); i++) {
       if (
@@ -133,9 +127,7 @@ Object.writeProp = function(obj, props, value) {
     throw new Error('props like array need to have elements');
   }
   /**/
-  const keys = Array.isArray(props)
-      ? props
-      : props.split('.');
+  const keys = Array.isArray(props) ? props : props.split('.');
   /**/
   let o = obj;
   const len = keys.length;
