@@ -143,13 +143,16 @@ String.prototype.containsIgAccents = function(search) {
   return target.includes(newSearch);
 };
 
+/**
+ * Função que retorna uma string de objetos e arrays
+ * @param {mixed} item Os itens a serem testados e concatenados
+ * @return {String} A string a ser retornada
+ */
 String.ofValidValues = function(item) {
   if (Array.isArray(item)) {
     return item.filter((i) => i).join(' ');
   } else if (typeof item === 'object' && !Array.isArray(item) && item) {
-    return Object.keys(item)
-        .filter((i) => item[i])
-        .join(' ');
+    return Object.keys(item).filter((i) => item[i]).join(' ');
   } else {
     return String(item);
   }
