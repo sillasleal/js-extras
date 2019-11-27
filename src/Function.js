@@ -31,6 +31,7 @@
  * @return {Promise} A Promise with result of functions
  */
 Function.pipeline = async (firstARg, functions) => {
+  // functions.reduce((obj, cur) => cur(obj), firstARg)
   const errorBase = 'Function.pipeline: ';
   if (!Array.isArray(functions)) {
     const error = errorBase + 'Functions have to be a Array of functions';
@@ -41,16 +42,7 @@ Function.pipeline = async (firstARg, functions) => {
     return;
   }
   /**/
-  let ret = firstARg;
-  for (const func of functions) {
-    if (typeof func !== 'function') {
-      const error = errorBase + 'Functions have to be a Array of functions';
-      throw new TypeError(error);
-    }
-    ret = await func(ret);
-  }
-  /**/
-  return ret;
+  return functions.reduce((obj, cur) => cur(obj), firstARg);
 };
 
 /**
